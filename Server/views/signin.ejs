@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin-Signup</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+    <link rel="stylesheet" href='/stylesheets/css/bootstrap.css'/>
+    <link rel="stylesheet" href='/stylesheets/admin.css'/>
+    <script>
+      function darkMode() {
+        var element = document.body;
+        element.classList.toggle("dark-mode");
+      }
+    </script>
+  </head>
+  <body >
+    <a href="/" >
+   <img src="/images/new-g-img.png" style="float:left; height: 70px; width: 110px;" >
+    </a>
+   </div>
+   <div style="float: right;"> <button id="darkbtn" onclick="darkMode()"><img src="/images/dark.png"></button><br>
+    <h3 style="text-align: center;">D/L
+  </div>
+    <div class="container jumbotron w-50 p-3 col-sm"><h1 style="color: rgb(14, 13, 13); text-align: center; font-family: 'Calibri', 'Arial Narrow', Arial, sans-serif; font: size 100px;"><b>W E L C O M E &ensp;&ensp;A D M I N </b></h1></div>
+    
+<div class="container jumbotron bg-success">
+  <form>
+    <div class="container" >
+      <div class="row">
+        <div class="col-sm">
+          <label for="fname"><b>First Name</b></label>
+          <input type="text" id="fname" class="form-control col-md-9">
+        </div>
+        <div class="col-sm">
+          <label for="lname"><b>Last Name</b></label>
+          <input type="text" id="lname" class="form-control col-md-9" >       </div>
+        
+      </div>
+      
+    </div>
+      <label for="email" class="mt-2 mx-3" ><b>Email</b></label>
+      <input type="email" id="email" class="form-control col-md-5  mx-3">
+      
+      <div class="row">
+        <div class="col-sm">
+          <label for="pass" class="mx-3"><b>Password</b></label>
+          <input type="text" id="pass" class="form-control col-md-9 mx-3">
+        </div>
+        <div class="col-sm">
+          <label for="cpass" class="mx-3"><b>Confirm Password</b></label>
+          <input type="text" id="cpass" class="form-control col-md-9 mx-2" > </div>      </div>
+          <div class="col-sm">
+
+            <label for="file" class="mx-5 mt-4" style=" text-shadow: 0 0 2px red; font-size: larger;"><b><i>Upload Photo</i></b></label>
+            <input type="file" id="file" class="file1">    </div>
+
+            <div class="col-md-4" >
+              <div class="form-group">
+                  <label>Gender</label> <br>
+                  <input type="radio" checked name="gender" id="male" value="Male"> <label for="male">Male</label>
+                  <input type="radio" name="gender" id="female" value="Female"> <label for="male">Female</label>
+              </div>
+            
+          </div>
+         <label for="l2"> <h2>Which kind of events will you organise? </h2></label> 
+          <input type="text" style=" width: 800px; height: 150px; " id="l2"><br>
+          
+          <input type="checkbox" style="margin-top: 5px; height: 20px;" id="lab">
+          <label for="lab">I agree term and conditions</label><span><a href="/admin/T&C" style="color: black;"> <u>read</u></a></span>
+          
+     
+      <div class="text-center" style="margin-top: 10px;">
+      <button class=" btn btn-primary my-2 my-sm-0  btn-lg" id="signup"  >signup</button>
+  </form>
+</div>
+
+  </body>
+</html>
