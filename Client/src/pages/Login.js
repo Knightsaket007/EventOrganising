@@ -9,53 +9,64 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     function log() {
-        axios.post('http://localhost:3000/login', {
-            email,
-            password
-        }).then((res) => {
-            if (res.data === 'logged') {
+        if (email && password) {
+            axios.post('http://localhost:3000/login', {
+                email,
+                password
+            }).then((res) => {
+                if (res.data === 'logged') {
 
-                navigate(`/dashboard/${email}`);
-            }
+                    navigate(`/dashboard/${email}`);
+                }
 
-            else if (res.data === 'required' || password === "") {
-                // alert('all field required');
-                let timerInterval
-                Swal.fire({
-                    title: 'All fields required!',
-                    html: 'I will close in <b></b> milliseconds.',
-                    color: `rgb(240, 240, 240)`,
-                    background: `rgba(0,0,300,0.4)`,
-                    timer: 2000,
-                    timerProgressBar: true,
-                    didOpen: () => {
-                        Swal.showLoading()
-                        const b = Swal.getHtmlContainer().querySelector('b')
-                        timerInterval = setInterval(() => {
-                            b.textContent = Swal.getTimerLeft()
-                        }, 100)
-                    },
-                    willClose: () => {
-                        clearInterval(timerInterval)
-                    }
-                }).then((result) => {
-                    /* Read more about handling dismissals below */
-                    if (result.dismiss === Swal.DismissReason.timer) {
-                        console.log('I was closed by the timer')
-                    }
-                })
-            }
-            else if (res.data === 'notMatch') {
-                // alert('email or password not matched')
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    color: `rgb(240, 240, 240)`,
-                    text: 'email or password not matched!',
-                    background: `rgba(0,0,300,0.4)`,
-                })
-            }
-        })
+                else if (res.data === 'required' || password === "") {
+                    // alert('all field required');
+                    let timerInterval
+                    Swal.fire({
+                        title: 'User Not Exist!',
+                        html: 'I will close in <b></b> milliseconds.',
+                        color: `rgb(240, 240, 240)`,
+                        background: `rgba(0,0,300,0.4)`,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading()
+                            const b = Swal.getHtmlContainer().querySelector('b')
+                            timerInterval = setInterval(() => {
+                                b.textContent = Swal.getTimerLeft()
+                            }, 100)
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            console.log('I was closed by the timer')
+                        }
+                    })
+                }
+                else if (res.data === 'notMatch') {
+                    // alert('email or password not matched')
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        color: `rgb(240, 240, 240)`,
+                        text: 'email or password not matched!',
+                        background: `rgba(0,0,300,0.4)`,
+                    })
+                }
+            })
+        }
+        else{
+            Swal.fire({
+                icon: 'question',
+                title: 'Oops...',
+                color: `rgb(240, 240, 240)`,
+                text: 'Field should not empty',
+                background: `rgba(0,0,300,0.4)`,
+            })
+        }
 
     }
     return (
@@ -72,7 +83,7 @@ const Login = () => {
                             <form class="account-form">
                                 <div class="form-group">
                                     <label for="email">Email<span>*</span></label>
-                                    <input id="email" type="text" placeholder="Enter Your Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                    <input id="email" type="Email" placeholder="Enter Your Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password<span>*</span></label>
@@ -92,7 +103,7 @@ const Login = () => {
                                 Don't have an account? <Link to="/signup">sign up now</Link>
                             </div>
                             <div class="or"><span>Or</span></div>
-                           
+
                         </div>
                     </div>
                 </div>

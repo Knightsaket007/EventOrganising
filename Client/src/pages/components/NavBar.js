@@ -8,7 +8,7 @@ const NavBar = () => {
                 <div className="container">
                     <div className="header-wrapper">
                         <div className="logo">
-                            <a href="index.html">
+                            <a href="/">
                                 <img src="/logo-red-ed.png" style={{ height: "70px" }} alt="logo" /><span><h5>Evento</h5></span>
                             </a>
                         </div>

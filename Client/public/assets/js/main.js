@@ -439,7 +439,7 @@
       days: 'Days'
     }, 
     function () {
-        alert('Done!');
+        // alert('Done!');
     });
     //Widget Slider
     $('.widget-slider').owlCarousel({

@@ -84,7 +84,7 @@ const Sign_user = () => {
                     showConfirmButton: false,
                     timer: 1500
                   })   
-                    navigate(`/user_login/${email}`);
+                    navigate(`/events/${email}`);
                 }
             })
 

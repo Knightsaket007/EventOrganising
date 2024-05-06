@@ -95,7 +95,7 @@ let Co_data = () => {
                                                 <td>{value.fullname}</td>
                                                 <td>{value.mobile}</td>
                                                 <td>{value.email}</td>
-                                                <td><h4><RiDeleteBin5Line onClick={() => delete12(value.email)} /></h4>
+                                                <td><h4 style={{cursor:"pointer"}}><RiDeleteBin5Line onClick={() => delete12(value.email)} /></h4>
                                                 </td>
                                                 <td>
                                                     <h4><MdModeEditOutline onClick={() => edit(value.email)} />

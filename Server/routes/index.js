@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 const conn = require('../myModule/connectDB');
 const Swal = require('sweetalert2');
-const nodemailer= require('nodemailer')
+const nodemailer = require('nodemailer')
 const session = require("express-session");
 const { application } = require('express');
 
@@ -113,11 +113,16 @@ router.get("/delete-cat", function (req, res) {
     res.send('category deleted');
   });
 })
+
 router.post('/login', (req, res) => {
   let { email, password } = req.body;
   let logSql = "SELECT * FROM `admintable` WHERE `email`='" + email + "'  ";
+  console.log("data is ..", email, password)
+  console.log("logSql is ..", logSql)
+
   conn.query(logSql, function (error, data) {
     if (error) throw error;
+    console.log("data is ..", data)
     if (data.length > 0) {
       if (data[0].password === password) {
         session.event_manager = email
@@ -282,49 +287,49 @@ router.post('/Admin-log', (req, res) => {
     if (data[0].Pass === pass) {
       res.send('logged');
     }
-    else{
+    else {
       res.send("notlog")
     }
 
   })
 })
 
-router.post("/paydone",function(req,res){
-  let{eventcode,price}=req.body;
+router.post("/paydone", function (req, res) {
+  let { eventcode, price } = req.body;
   let dt = new Date();
   let tm = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-  dt = dt.getFullYear() + "-" +(dt.getMonth()+1) +"-" + dt.getDate();
-  
-  let Insertpay="INSERT INTO `payment`(`bookingid`, `email`, `amount`, `eventcode`, `bookingdate`,`Time`, `status`) VALUES ('','"+ session.event_manager +"','"+ price+"','"+eventcode+"','"+dt+"','"+tm+"','success')"
+  dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
+
+  let Insertpay = "INSERT INTO `payment`(`bookingid`, `email`, `amount`, `eventcode`, `bookingdate`,`Time`, `status`) VALUES ('','" + session.event_manager + "','" + price + "','" + eventcode + "','" + dt + "','" + tm + "','success')"
   console.log(Insertpay)
-  conn.query(Insertpay,(err)=>{
-  if(err)throw err;
- 
+  conn.query(Insertpay, (err) => {
+    if (err) throw err;
+
   })
 })
 
-router.get('/orderdetails',function(req,res){
+router.get('/orderdetails', function (req, res) {
   // let {email,eventcode}=req.body;
-let email=req.query.email;
-let eventcode=req.query.eventcode;
+  let email = req.query.email;
+  let eventcode = req.query.eventcode;
 
-  let getusersql="SELECT `name` FROM `userdata` WHERE `email`='"+ email +"' ";
-  let geteventsql="SELECT `eventcode`,`eventname` FROM `events` WHERE `eventcode`='"+ eventcode +"' ";
-  let getpaysql="SELECT `amount`,`bookingdate`,`time` FROM `payment` WHERE `email`='"+ email +"' AND `eventcode`='"+ eventcode +"' ";
+  let getusersql = "SELECT `name` FROM `userdata` WHERE `email`='" + email + "' ";
+  let geteventsql = "SELECT `eventcode`,`eventname` FROM `events` WHERE `eventcode`='" + eventcode + "' ";
+  let getpaysql = "SELECT `amount`,`bookingdate`,`time` FROM `payment` WHERE `email`='" + email + "' AND `eventcode`='" + eventcode + "' ";
 
-  let sel = "select name,events.eventcode,eventname,amount,bookingdate,time from userdata,events,payment where userdata.email=payment.email and events.eventcode=payment.eventcode and payment.eventcode='"+eventcode+"' and payment.email='"+email+"'"
+  let sel = "select name,events.eventcode,eventname,amount,bookingdate,time from userdata,events,payment where userdata.email=payment.email and events.eventcode=payment.eventcode and payment.eventcode='" + eventcode + "' and payment.email='" + email + "'"
 
-  conn.query(sel,(err,data)=>{
-    if(err)throw err;
+  conn.query(sel, (err, data) => {
+    if (err) throw err;
     // res.send("success",{data})
     res.send(data)
   })
 
 })
 
-router.post('/contact',(req,res)=>{
-  let{Email,Name,Subject,Message}= req.body;
-  
+router.post('/contact', (req, res) => {
+  let { Email, Name, Subject, Message } = req.body;
+
   const transport = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -332,15 +337,15 @@ router.post('/contact',(req,res)=>{
       pass: "otp@1234"
     }
   });
-  
+
   const options = {
     from: Email,
-    to:"saketsourav3@gmail.com" ,
-    
+    to: "saketsourav300@gmail.com",
+
     text: "Name : " + Name,
-    subject:"Subject : "+Subject,
-    text:"Message : "+Message,
-    
+    subject: "Subject : " + Subject,
+    text: "Message : " + Message,
+
     // html: "<h1 style='color: #00B7FF'>New Password</h1><p>Your new password <span style='color: red'>" + newPassword + "</span></p>"
   }
   transport.sendMail(options, (err) => {
